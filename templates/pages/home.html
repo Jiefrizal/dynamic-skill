@@ -1,0 +1,75 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Dynamic Skill
+{% endblock %}
+
+{% block content %}
+
+<section
+    class="hero"
+    {% if hero_image %}
+    style="--hero-image: url('{{ url_for('static', filename='images/hero/' ~ hero_image) }}');"
+    {% endif %}
+>
+    <div class="container hero-content">
+
+</span>
+
+<div class="mt-4">
+    <a href="{{ url_for('consultation') }}" class="btn btn-warning btn-lg">
+        Konsultasi Sekarang
+    </a>
+</div>
+
+<h1 class="hero-title">
+    Don't be the same, be better with Dynamic Skill
+</h1>
+
+</section>
+
+<section class="py-5 bg-light">
+
+<div class="container content-page">
+
+<div class="row text-center">
+
+<div class="col-md-3">
+
+<h2>100+</h2>
+
+<p>Program Training</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>50+</h2>
+
+<p>Perusahaan Klien</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>5000+</h2>
+
+<p>Peserta</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>10+</h2>
+
+<p>Tahun Pengalaman</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Konsultasi{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <style>
+        footer { display: none !important; }
+    </style>
+
+    <div class="mb-4">
+        <h1>Konsultasi Sekarang</h1>
+        <p>Pilih layanan dan isi formulir untuk mengajukan konsultasi.</p>
+    </div>
+
+    <div id="alertMessage" class="alert d-none" role="alert"></div>
+
+    <form id="consultationForm" method="post" onsubmit="return false;">
+        <div class="mb-3">
+            <label class="form-label">Nama</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Layanan</label>
+            <select name="service" class="form-select" required>
+                <option value="">-- Pilih Layanan --</option>
+                <option value="Pelatihan In-House">Pelatihan In-House</option>
+                <option value="Konsultasi Organisasi">Konsultasi Organisasi</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Assessment">Assessment</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Waktu Preferensi</label>
+            <input type="datetime-local" name="preferred" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Pesan / Keterangan / Nomor Kontak</label>
+            <textarea name="message" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="button" id="consultationSubmit" class="btn btn-primary" disabled>Kirim Permintaan</button>
+    </form>
+
+    <script>
+    const form = document.getElementById('consultationForm');
+    const submitBtn = document.getElementById('consultationSubmit');
+    const alertDiv = document.getElementById('alertMessage');
+
+    // Enable submit button only when required fields are valid
+    function updateSubmitState() {
+        // required fields: name, email, service
+        const name = form.querySelector('input[name="name"]').value.trim();
+        const email = form.querySelector('input[name="email"]').value.trim();
+        const service = form.querySelector('select[name="service"]').value.trim();
+        submitBtn.disabled = !(name && email && service);
+    }
+
+    ['input', 'change'].forEach(evt => {
+        form.addEventListener(evt, updateSubmitState);
+    });
+
+    // allow Enter to submit when form valid
+    form.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (!submitBtn.disabled) submitBtn.click();
+        }
+    });
+
+    updateSubmitState();
+
+    submitBtn.addEventListener('click', function() {
+        const formData = new FormData(form);
+
+        fetch('/consultation', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alertDiv.className = 'alert alert-success';
+                alertDiv.textContent = data.message || 'Permintaan konsultasi berhasil dikirim!';
+                form.reset();
+                setTimeout(() => { alertDiv.classList.add('d-none'); }, 5000);
+            } else {
+                alertDiv.className = 'alert alert-danger';
+                alertDiv.textContent = data.error || 'Terjadi kesalahan. Silakan coba lagi.';
+            }
+            alertDiv.classList.remove('d-none');
+        })
+        .catch(() => {
+            alertDiv.className = 'alert alert-danger';
+            alertDiv.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+            alertDiv.classList.remove('d-none');
+        });
+    });
+    </script>
+
+{% endblock %}

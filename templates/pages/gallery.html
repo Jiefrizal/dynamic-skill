@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Galeri{% endblock %}
+
+{% block content %}
+
+<div class="container content-page">
+
+    <h1 class="page-heading">
+        Galeri Kegiatan
+    </h1>
+
+    {% if images %}
+        <div class="row g-4">
+
+            {% for image in images %}
+                {% set name_without_ext = image.rsplit('.', 1)[0] %}
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+
+                        <img src="{{ url_for('static', filename='images/' ~ image) }}"
+                             class="card-img-top"
+                             alt="{{ name_without_ext }}">
+
+                        <div class="card-body">
+                            <p class="card-text text-center mb-0">
+                                {{ name_without_ext }}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            Tidak ada foto ditemukan. Tambahkan gambar ke
+            <strong>static/images/</strong> lalu muat ulang halaman.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

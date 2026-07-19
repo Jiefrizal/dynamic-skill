@@ -1,0 +1,113 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Tentang Kami{% endblock %}
+
+{% block content %}
+
+<div class="container content-page">
+
+    <h1 class="page-heading">
+        Tentang Dynamic Skill
+    </h1>
+
+    <p>
+        PT Lentera Dinamika Indonesia (Dynamic Skill) adalah lembaga pendidikan luar sekolah
+        yang bergerak di bidang pendidikan dan pelatihan bagi perusahaan, instansi pemerintah,
+        maupun satuan pendidikan. Kami menyediakan berbagai layanan seperti Seminar,
+        Workshop, In House Training (IHT), Trainer of Trainer (TOT), Outbound Management
+        Training (Team Building, Capacity Building, Leadership), LDKS, dan berbagai program
+        pengembangan sumber daya manusia lainnya.
+    </p>
+
+    <p>
+        PT Lentera Dinamika Indonesia berkomitmen untuk terus berkolaborasi dan bersinergi
+        dengan berbagai pihak dalam menciptakan sumber daya manusia yang unggul,
+        profesional, dan berdaya saing tinggi.
+    </p>
+
+    <h2 class="section-heading">
+        Meet Our Team
+    </h2>
+
+    {% if team_images %}
+    <div class="row g-4">
+        {% for image in team_images %}
+            {% set name_without_ext = image.rsplit('.', 1)[0] %}
+
+            <div class="col-md-4 col-sm-6">
+                <div class="team-card mx-auto">
+                    <div class="card shadow-sm overflow-hidden">
+
+                        <img src="{{ url_for('static', filename='images/team/' ~ image) }}"
+                             class="card-img-top"
+                             alt="{{ name_without_ext|replace('_',' ') }}">
+
+                        <div class="card-body">
+                            <p class="card-text text-center mb-0">
+                                {{ name_without_ext|replace('_',' ') }}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        Tidak ada foto tim. Tambahkan foto ke
+        <strong>static/images/team/</strong>.
+    </div>
+    {% endif %}
+
+    <h2 class="section-heading">
+        Visi dan Misi
+    </h2>
+
+    <p>
+        Menjadi lembaga pendidikan dan pelatihan yang lebih maju dari yang terdepan,
+        meningkatkan dan mengembangkan kualitas sumber daya manusia (SDM),
+        serta menjamin kepuasan pelanggan melalui pelayanan jasa pendidikan
+        dan pelatihan yang profesional.
+    </p>
+
+    <h2 class="section-heading">
+        Legality Company
+    </h2>
+
+    {% if legal_images %}
+    <div class="row g-4">
+        {% for image in legal_images %}
+            {% set name_without_ext = image.rsplit('.', 1)[0] %}
+
+            <div class="col-md-4 col-sm-6">
+                <div class="team-card mx-auto">
+                    <div class="card shadow-sm overflow-hidden">
+
+                        <img src="{{ url_for('static', filename='images/legal/' ~ image) }}"
+                             class="card-img-top"
+                             alt="{{ name_without_ext|replace('_',' ') }}">
+
+                        <div class="card-body">
+                            <p class="card-text text-center mb-0">
+                                {{ name_without_ext|replace('_',' ') }}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        Tidak ada foto legalitas. Tambahkan foto ke
+        <strong>static/images/legal/</strong>.
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

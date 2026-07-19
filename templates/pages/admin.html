@@ -1,0 +1,94 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Admin - Kelola Gambar{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="mb-4">Kelola Gambar Home</h1>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Upload Gambar Hero</h5>
+
+                        <div id="alertMessage" class="alert d-none" role="alert"></div>
+
+                        {% if current_hero_image %}
+                        <div class="mb-4">
+                            <h6>Gambar Saat Ini:</h6>
+                            <img src="{{ url_for('static', filename='images/hero/' + current_hero_image) }}" alt="Hero Image" class="img-fluid rounded" style="max-height: 300px;">
+                            <p class="text-muted mt-2">{{ current_hero_image }}</p>
+                        </div>
+                        <hr>
+                        {% endif %}
+
+                        <form id="uploadForm">
+                            <div class="mb-3">
+                                <label for="heroImage" class="form-label">Pilih Gambar Baru</label>
+                                <input type="file" class="form-control" id="heroImage" name="heroImage" accept="image/*" required>
+                                <small class="text-muted">Format: JPG, PNG, GIF, WEBP (Max 5MB)</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Upload Gambar</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('home') }}" class="btn btn-secondary">Kembali ke Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('heroImage');
+    const file = fileInput.files[0];
+    const alertDiv = document.getElementById('alertMessage');
+
+    // Validate file size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+        alertDiv.className = 'alert alert-danger';
+        alertDiv.textContent = 'Ukuran file terlalu besar. Maksimal 5MB.';
+        alertDiv.classList.remove('d-none');
+        return;
+    }
+
+    const formData = new FormData(this);
+
+    fetch('/admin/upload-hero', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alertDiv.className = 'alert alert-success';
+            alertDiv.textContent = 'Gambar berhasil diupload! Halaman akan memuat ulang...';
+            alertDiv.classList.remove('d-none');
+
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            alertDiv.className = 'alert alert-danger';
+            alertDiv.textContent = data.error || 'Terjadi kesalahan. Silakan coba lagi.';
+            alertDiv.classList.remove('d-none');
+        }
+    })
+    .catch(error => {
+        alertDiv.className = 'alert alert-danger';
+        alertDiv.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+        alertDiv.classList.remove('d-none');
+    });
+});
+</script>
+
+{% endblock %}
