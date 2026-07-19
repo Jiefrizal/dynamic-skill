@@ -375,3 +375,28 @@ footer .col-md-6{
     text-align:justify;
     line-height:1.8;
 }
+.consultation-page {
+    padding-top: 140px;
+    padding-bottom: 80px;
+}
+
+
+.consultation-card {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+
+.consultation-page h1 {
+    font-size: 42px;
+    font-weight:700;
+}
+
+
+.consultation-page textarea {
+    min-height:150px;
+}
