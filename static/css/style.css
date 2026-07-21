@@ -38,13 +38,14 @@ footer .col-md-6{
 ================================================== */
 
 .hero{
-    min-height:calc(100vh - 80px);
+    min-height:100vh;
     position:relative;
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     text-align:center;
-    padding:130px 20px 80px;
+    padding:140px 20px 50px;
 
     background-image:
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
@@ -60,7 +61,7 @@ footer .col-md-6{
 .hero-content{
     max-width:900px;
     width:100%;
-    margin:0 auto;
+    margin:auto auto 0;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -74,7 +75,7 @@ footer .col-md-6{
     transform:none;
     white-space:normal;
 
-    font-size:clamp(1.8rem, 4.5vw, 3rem);
+    font-size:clamp(1.4rem, 3.5vw, 2.3rem);
     font-weight:800;
     line-height:1.25;
     max-width:100%;
@@ -309,6 +310,18 @@ footer .col-md-6{
     color:#ffc107 !important;
 }
 
+.navbar-toggler{
+    border-color:rgba(255,255,255,.5);
+}
+
+.navbar-toggler:focus{
+    box-shadow:0 0 0 .25rem rgba(255,255,255,.25);
+}
+
+.navbar-toggler-icon{
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
 
 /* ===========================
    LOGO NAVBAR
@@ -330,8 +343,8 @@ footer .col-md-6{
 
 @media (max-width:768px){
     .hero{
-        min-height:80vh;
-        padding:110px 16px 60px;
+        min-height:85vh;
+        padding:120px 16px 35px;
     }
 
     .navbar-logo{
@@ -358,8 +371,8 @@ footer .col-md-6{
 
 @media (max-width:576px){
     .hero{
-        min-height:75vh;
-        padding:100px 15px 50px;
+        min-height:80vh;
+        padding:110px 15px 25px;
     }
 
     .hero-title{
