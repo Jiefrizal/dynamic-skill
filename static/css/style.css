@@ -595,3 +595,17 @@ footer .col-md-6{
         filter: brightness(0) invert(1);
     }
 }
+/* ==========================================
+   FOOTER COLLABORATION
+========================================== */
+
+.footer-collaboration{
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 18px 15px;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    margin-bottom: 25px;
+    letter-spacing: .5px;
+}
