@@ -6,12 +6,8 @@ Dynamic Skill
 
 {% block content %}
 
-<section
-    class="hero"
-    {% if hero_image %}
-    style="--hero-image: url('{{ url_for('static', filename='images/hero/' ~ hero_image) }}');"
-    {% endif %}
->
+<section class="hero" {% if hero_image %}
+    style="--hero-image: url('{{ url_for('static', filename='images/hero/' ~ hero_image) }}');" {% endif %}>
     <div class="container hero-content">
         <h1 class="hero-title">
             Don't be the same, be better with Dynamic Skill
