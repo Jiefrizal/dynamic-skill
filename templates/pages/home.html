@@ -13,63 +13,46 @@ Dynamic Skill
     {% endif %}
 >
     <div class="container hero-content">
-
-</span>
-
-<div class="mt-4">
-    <a href="{{ url_for('consultation') }}" class="btn btn-warning btn-lg">
-        Konsultasi Sekarang
-    </a>
-</div>
-
-<h1 class="hero-title">
-    Don't be the same, be better with Dynamic Skill
-</h1>
-
+        <h1 class="hero-title">
+            Don't be the same, be better with Dynamic Skill
+        </h1>
+        <div class="hero-action">
+            <a href="{{ url_for('consultation') }}" class="btn btn-warning btn-lg">
+                Konsultasi Sekarang
+            </a>
+        </div>
+    </div>
 </section>
 
-<section class="py-5 bg-light">
-
-<div class="container content-page">
-
-<div class="row text-center">
-
-<div class="col-md-3">
-
-<h2>100+</h2>
-
-<p>Program Training</p>
-
-</div>
-
-<div class="col-md-3">
-
-<h2>50+</h2>
-
-<p>Perusahaan Klien</p>
-
-</div>
-
-<div class="col-md-3">
-
-<h2>5000+</h2>
-
-<p>Peserta</p>
-
-</div>
-
-<div class="col-md-3">
-
-<h2>10+</h2>
-
-<p>Tahun Pengalaman</p>
-
-</div>
-
-</div>
-
-</div>
-
+<section class="stats-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <h2 class="stat-number">100+</h2>
+                    <p class="stat-label">Program Training</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <h2 class="stat-number">50+</h2>
+                    <p class="stat-label">Perusahaan Klien</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <h2 class="stat-number">5000+</h2>
+                    <p class="stat-label">Peserta</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <h2 class="stat-number">10+</h2>
+                    <p class="stat-label">Tahun Pengalaman</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock %}
