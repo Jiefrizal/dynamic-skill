@@ -73,5 +73,39 @@ Konsultasi - Dynamic Skill
 
 </section>
 
+from flask_mail import Message
 
+@app.route("/consultation", methods=["GET","POST"])
+def consultation():
+
+    if request.method == "POST":
+
+        nama = request.form["nama"]
+        perusahaan = request.form["perusahaan"]
+        email = request.form["email"]
+        telepon = request.form["telepon"]
+        pesan = request.form["pesan"]
+
+        msg = Message(
+            subject="Permintaan Konsultasi Baru",
+            recipients=["info@dynamicskill.id"]
+        )
+
+        msg.body = f"""
+Nama        : {nama}
+Perusahaan  : {perusahaan}
+Email       : {email}
+Telepon     : {telepon}
+
+Pesan:
+
+{pesan}
+"""
+
+        mail.send(msg)
+
+        flash("Pesan berhasil dikirim.")
+        return redirect(url_for("consultation"))
+
+    return render_template("consultation.html")
 {% endblock %}
