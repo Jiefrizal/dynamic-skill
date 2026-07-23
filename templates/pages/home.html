@@ -134,17 +134,19 @@ Dynamic Skill
     }
 }
 
-/* Mobile: 4 item dalam satu baris horizontal dengan font kecil */
+/* Mobile: 4 item dalam satu baris horizontal dengan font kecil dan pembungkusan kata */
 @media (max-width: 576px) {
     .stats-section .stat-card {
-        padding: 0.25rem 0.1rem;
+        padding: 0.25rem 0.05rem;
     }
     .stats-section .stat-number {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         margin-bottom: 0.05rem;
     }
     .stats-section .stat-label {
-        font-size: 0.6rem;
+        font-size: 0.65rem;
+        white-space: normal !important;
+        line-height: 1.2;
     }
 }
 
@@ -273,23 +275,23 @@ Dynamic Skill
         <!-- Visi & Misi Row -->
         <div class="row mb-5 g-3 g-md-4 overflow-hidden" style="padding: 10px 0;">
             <div class="col-6 animate-on-scroll anim-left">
-                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-start" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
+                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-center" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
                     <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1a1a1a; font-size: clamp(1.1rem, 3.5vw, 1.4rem); position: relative; padding-bottom: 8px; margin-bottom: 12px;">
                         VISI
-                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
+                        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
                     </h3>
-                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: justify; margin-bottom: 0;">
+                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: center; margin-bottom: 0;">
                         Menjadi lembaga pendidikan dan pelatihan yang lebih maju dari yang terdepan.
                     </p>
                 </div>
             </div>
             <div class="col-6 animate-on-scroll anim-right">
-                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-start" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
+                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-center" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
                     <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1a1a1a; font-size: clamp(1.1rem, 3.5vw, 1.4rem); position: relative; padding-bottom: 8px; margin-bottom: 12px;">
                         MISI
-                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
+                        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
                     </h3>
-                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: justify; margin-bottom: 0;">
+                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: center; margin-bottom: 0;">
                         Meningkatkan dan mengembangkan kualitas sumber daya manusia (SDM), serta menjamin kepuasan pelanggan melalui pelayanan jasa pendidikan dan pelatihan yang profesional.
                     </p>
                 </div>

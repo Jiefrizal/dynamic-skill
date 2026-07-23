@@ -394,7 +394,7 @@ footer .col-md-6{
     }
     .stat-label {
         font-size: .7rem;
-        white-space: nowrap;
+        white-space: normal;
     }
 }
 
