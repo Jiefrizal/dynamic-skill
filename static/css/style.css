@@ -521,8 +521,7 @@ footer .col-md-6{
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 60px;
-    height: 60px;
+    padding: 12px 22px;
     background-color: #25d366;
     color: #fff !important;
     border-radius: 50px;
@@ -531,34 +530,63 @@ footer .col-md-6{
     z-index: 999999;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-decoration: none;
+    animation: whatsappBounce 2s ease-in-out infinite;
 }
 
 .floating-whatsapp:hover {
-    transform: scale(1.1) translateY(-3px);
+    transform: scale(1.05) translateY(-3px);
     background-color: #20ba5a;
     box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
     color: #fff !important;
+    animation: none;
+}
+
+/* Bounce animation for WhatsApp button */
+@keyframes whatsappBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-12px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-6px);
+    }
 }
 
 .floating-whatsapp svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     fill: currentColor;
+    flex-shrink: 0;
+}
+
+.whatsapp-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 @media (max-width: 576px) {
     .floating-whatsapp {
         bottom: 20px;
         right: 20px;
-        width: 52px;
-        height: 52px;
+        padding: 10px 16px;
+        gap: 8px;
     }
     .floating-whatsapp svg {
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
+    }
+    .whatsapp-label {
+        font-size: 12px;
     }
 }
 /* ==========================================
