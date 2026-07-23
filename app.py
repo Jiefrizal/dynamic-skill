@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for
 from datetime import datetime
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
@@ -13,6 +13,7 @@ MESSAGES_FILE = os.path.join(os.path.dirname(__file__), 'messages.xlsx')
 HERO_FOLDER = os.path.join(app.static_folder, 'images', 'hero')
 TEAM_FOLDER = os.path.join(app.static_folder, 'images', 'team')
 LEGAL_FOLDER = os.path.join(app.static_folder, 'images', 'legal')
+VISIMISI_FOLDER = os.path.join(app.static_folder, 'images', 'visimisi')
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -20,6 +21,7 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 os.makedirs(HERO_FOLDER, exist_ok=True)
 os.makedirs(TEAM_FOLDER, exist_ok=True)
 os.makedirs(LEGAL_FOLDER, exist_ok=True)
+os.makedirs(VISIMISI_FOLDER, exist_ok=True)
 
 def init_excel():
     """Initialize Excel file with headers if it doesn't exist"""
@@ -149,6 +151,22 @@ def get_hero_image():
         return images[-1]  # Return latest image
     return None
 
+def get_visimisi_images():
+    """Get all visimisi images from folder, sorted"""
+    if os.path.isdir(VISIMISI_FOLDER):
+        images = sorted([f for f in os.listdir(VISIMISI_FOLDER) if allowed_file(f)])
+        return images
+    return []
+
+def get_visimisi_image():
+    """Get current visimisi background image from folder"""
+    images = get_visimisi_images()
+    if images:
+        return images[-1]  # Return latest image
+    return None
+
+
+
 def delete_old_hero_images():
     """Delete old hero images, keep only the latest"""
     if os.path.isdir(HERO_FOLDER):
@@ -179,7 +197,8 @@ def get_legal_images():
 @app.route("/")
 def home():
     hero_image = get_hero_image()
-    return render_template("pages/home.html", hero_image=hero_image)
+    visimisi_image = get_visimisi_image()
+    return render_template("pages/home.html", hero_image=hero_image, visimisi_image=visimisi_image)
 
 
 @app.route("/about")
@@ -191,7 +210,7 @@ def about():
 
 @app.route("/services")
 def services():
-    return render_template("pages/services.html")
+    return redirect(url_for('home') + '#services')
 
 
 @app.route("/gallery")

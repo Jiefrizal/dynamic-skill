@@ -147,6 +147,71 @@ Dynamic Skill
         font-size: 0.6rem;
     }
 }
+
+/* Services Section Layout */
+#services {
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+}
+
+#services .card {
+    padding: 1.5rem 1.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#services .card p {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    #services {
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
+    }
+    #services .card {
+        padding: 1rem 0.5rem;
+    }
+    #services .card .d-flex {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+    }
+    #services .card .rounded-circle {
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+    #services .card h3 {
+        font-size: 1rem !important;
+    }
+    #services .card p {
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        text-align: center !important;
+    }
+}
+
+/* Scroll Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+    will-change: transform, opacity;
+}
+
+.anim-left {
+    transform: translateX(-50px);
+}
+
+.anim-right {
+    transform: translateX(50px);
+}
+
+.animate-on-scroll.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 </style>
 
 <section class="hero">
@@ -165,7 +230,7 @@ Dynamic Skill
     </h1>
 </div>
 
-<section class="stats-section py-5 bg-light">
+<section class="stats-section pt-5 pb-3 bg-light">
     <div class="container">
         <div class="row text-center g-4">
             <div class="col-3 col-md-3">
@@ -202,4 +267,93 @@ Dynamic Skill
     </div>
 </section>
 
-{% endblock %}
+<!-- Section Layanan -->
+<section id="services" class="bg-white">
+    <div class="container">
+        <!-- Visi & Misi Row -->
+        <div class="row mb-5 g-3 g-md-4 overflow-hidden" style="padding: 10px 0;">
+            <div class="col-6 animate-on-scroll anim-left">
+                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-start" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
+                    <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1a1a1a; font-size: clamp(1.1rem, 3.5vw, 1.4rem); position: relative; padding-bottom: 8px; margin-bottom: 12px;">
+                        VISI
+                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
+                    </h3>
+                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: justify; margin-bottom: 0;">
+                        Menjadi lembaga pendidikan dan pelatihan yang lebih maju dari yang terdepan.
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 animate-on-scroll anim-right">
+                <div class="p-3 p-md-4 h-100 rounded-3 shadow-sm text-start" style="{% if visimisi_image %}background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('{{ url_for('static', filename='images/visimisi/' ~ visimisi_image) }}'); background-size: cover; background-position: center;{% else %}background-color: #f8f9fa;{% endif %} border: 1px solid #e9ecef;">
+                    <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1a1a1a; font-size: clamp(1.1rem, 3.5vw, 1.4rem); position: relative; padding-bottom: 8px; margin-bottom: 12px;">
+                        MISI
+                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 3px; background-color: #ffc107; display: block;"></span>
+                    </h3>
+                    <p class="text-secondary" style="font-size: clamp(12px, 3vw, 14px); line-height: 1.6; text-align: justify; margin-bottom: 0;">
+                        Meningkatkan dan mengembangkan kualitas sumber daya manusia (SDM), serta menjamin kepuasan pelanggan melalui pelayanan jasa pendidikan dan pelatihan yang profesional.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-4">
+            <h2 class="welcome-text">Layanan Kami</h2>
+            <div style="width: 60px; height: 3px; background-color: #0d6efd; margin: 15px auto 0;"></div>
+        </div>
+        <div class="row g-2 g-md-4">
+            <div class="col-4 col-md-4">
+                <div class="card shadow-sm border-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 2.5em; height: 2.5em; min-width: 2.5em; min-height: 2.5em; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="#0d6efd" class="bi bi-mortarboard-fill" viewBox="0 0 16 16">
+                                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3 7.5-3a.5.5 0 0 0 .025-.917l-7.5-3z"/>
+                                <path d="M4.176 9.032a.5.5 0 0 0-.656.327 5.5 5.5 0 0 0-.294 1.905c0 2.454 2.001 4.475 4.774 4.475 2.774 0 4.774-2.02 4.774-4.475 0-.74-.103-1.423-.294-1.905a.5.5 0 0 0-.656-.327l-.022.009a.5.5 0 0 0-.327.656c.123.31.205.772.205 1.222 0 1.944-1.536 3.475-3.774 3.475-2.237 0-3.774-1.531-3.774-3.475 0-.45.082-.912.205-1.222a.5.5 0 0 0-.327-.656l-.023-.009z"/>
+                            </svg>
+                        </div>
+                        <h3 class="m-0" style="font-size: 1.2rem; font-weight: 700;">Training</h3>
+                    </div>
+                    <p class="text-secondary" style="text-align: justify; line-height: 1.6; font-size: 13.5px; margin-bottom: 0;">
+                        Pelatihan SDM profesional untuk meningkatkan kompetensi,
+                        produktivitas, dan kinerja individu maupun perusahaan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-4 col-md-4">
+                <div class="card shadow-sm border-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 2.5em; height: 2.5em; min-width: 2.5em; min-height: 2.5em; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="#0d6efd" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="m-0" style="font-size: 1.2rem; font-weight: 700;">Consulting</h3>
+                    </div>
+                    <p class="text-secondary" style="text-align: justify; line-height: 1.6; font-size: 13.5px; margin-bottom: 0;">
+                        Konsultasi pengembangan organisasi, manajemen SDM,
+                        serta peningkatan efektivitas perusahaan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-4 col-md-4">
+                <div class="card shadow-sm border-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 2.5em; height: 2.5em; min-width: 2.5em; min-height: 2.5em; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="#0d6efd" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+                                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="m-0" style="font-size: 1.2rem; font-weight: 700;">Workshop</h3>
+                    </div>
+                    <p class="text-secondary" style="text-align: justify; line-height: 1.6; font-size: 13.5px; margin-bottom: 0;">
+                        Seminar dan workshop interaktif dengan materi yang
+                        aplikatif sesuai kebutuhan perusahaan maupun instansi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
