@@ -4,161 +4,125 @@
 
 {% block content %}
 
-<section class="content-page">
+<style>
+    .contact-section {
+        font-family: 'Montserrat', sans-serif;
+        padding-top: 90px !important;
+    }
+    .contact-title {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-top: 0;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    .contact-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #0d6efd;
+        border-radius: 2px;
+    }
+    .contact-lead {
+        font-size: clamp(15px, 2.5vw, 17px);
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 3rem;
+    }
+    .contact-card {
+        border: none;
+        border-radius: 16px;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+    }
+    .contact-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05) !important;
+    }
+    @media (max-width: 768px) {
+        .contact-card {
+            padding: 0.75rem 0.25rem !important;
+            border-radius: 12px !important;
+        }
+        .contact-card .fs-1 {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .contact-card h5 {
+            font-size: 12px !important;
+            margin-bottom: 0.25rem !important;
+        }
+        .contact-card p {
+            font-size: 9px !important;
+            line-height: 1.4 !important;
+        }
+    }
+</style>
 
-    <div class="container">
+<section class="content-page contact-section">
 
-        <h1 class="page-heading">
+    <div class="container text-center">
+
+        <h1 class="contact-title">
             Hubungi Kami
         </h1>
 
-        <div class="row align-items-start g-5">
+        <div class="row justify-content-center">
 
-            <!-- Informasi Kontak -->
-            <div class="col-lg-5">
+            <div class="col-lg-10">
 
-                <p class="mb-4">
+                <p class="contact-lead">
                     Tim <strong>Dynamic Skill</strong> siap membantu perusahaan Anda
                     dalam bidang pelatihan, konsultasi, workshop,
                     dan pengembangan sumber daya manusia.
                 </p>
 
-                <div class="mb-4">
-                    <h5>📍 Alamat</h5>
-                    <p>
-                        Jl. Tuanku Tambusai No. 08,<br>
-                        Kel. Jadirejo, Kec. Sukajadi,<br>
-                        Kota Pekanbaru, Riau
-                    </p>
-                </div>
+                <div class="row g-2 g-md-4 justify-content-center">
+                    <div class="col-4 col-md-4">
+                        <div class="card contact-card shadow-sm p-4 h-100">
+                            <div class="fs-1 mb-3">📍</div>
+                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Alamat</h5>
+                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+                                Jl. Tuanku Tambusai No. 08,<br>
+                                Kel. Jadirejo, Kec. Sukajadi,<br>
+                                Kota Pekanbaru, Riau
+                            </p>
+                        </div>
+                    </div>
 
-                <div class="mb-4">
-                    <h5>📧 Email</h5>
-                    <p>
-                        lenteradinamikaindonesia@gmail.com
-                    </p>
-                </div>
+                    <div class="col-4 col-md-4">
+                        <div class="card contact-card shadow-sm p-4 h-100">
+                            <div class="fs-1 mb-3">📧</div>
+                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Email</h5>
+                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0; word-break: break-all;">
+                                lenteradinamikaindonesia@gmail.com
+                            </p>
+                        </div>
+                    </div>
 
-                <div>
-                    <h5>📞 Telepon</h5>
-                    <p>
-                        0813-6400-4646
-                    </p>
+                    <div class="col-4 col-md-4">
+                        <div class="card contact-card shadow-sm p-4 h-100">
+                            <div class="fs-1 mb-3">📞</div>
+                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Telepon</h5>
+                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+                                0813-6400-4646
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
-
-            <!-- Form -->
-            <div class="col-lg-7">
-
-                <div class="card shadow-lg border-0 p-4">
-
-                    <h3 class="mb-4">
-                        Kirim Pesan
-                    </h3>
-
-                    <div id="alertMessage" class="alert d-none"></div>
-
-                    <form id="contactForm">
-
-                        <div class="mb-3">
-                            <label class="form-label">Nama</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="name"
-                                name="name"
-                                placeholder="Masukkan nama"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="email"
-                                name="email"
-                                placeholder="Masukkan email"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Pesan</label>
-                            <textarea
-                                class="form-control"
-                                id="message"
-                                name="message"
-                                rows="6"
-                                placeholder="Tuliskan pesan Anda..."
-                                required></textarea>
-                        </div>
-
-                        <button class="btn btn-warning px-4" type="submit">
-                            Kirim Pesan
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
         </div>
 
     </div>
 
 </section>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e){
-
-    e.preventDefault();
-
-    const form=this;
-    const formData=new FormData(form);
-    const alertDiv=document.getElementById('alertMessage');
-
-    fetch('/contact',{
-        method:'POST',
-        body:formData
-    })
-
-    .then(res=>res.json())
-
-    .then(data=>{
-
-        alertDiv.classList.remove('d-none');
-
-        if(data.success){
-
-            alertDiv.className='alert alert-success';
-
-            alertDiv.innerHTML=data.message;
-
-            form.reset();
-
-        }else{
-
-            alertDiv.className='alert alert-danger';
-
-            alertDiv.innerHTML=data.error;
-
-        }
-
-    })
-
-    .catch(()=>{
-
-        alertDiv.className='alert alert-danger';
-
-        alertDiv.innerHTML='Terjadi kesalahan. Silakan coba lagi.';
-
-        alertDiv.classList.remove('d-none');
-
-    });
-
-});
-</script>
 
 {% endblock %}

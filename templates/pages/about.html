@@ -7,12 +7,13 @@
 <style>
     .about-section {
         font-family: 'Montserrat', sans-serif;
+        padding-top: 90px !important;
     }
     .about-title {
         font-size: clamp(2rem, 5vw, 2.75rem);
         font-weight: 800;
         color: #1a1a1a;
-        margin-top: 1.5rem;
+        margin-top: 0;
         margin-bottom: 2rem;
         position: relative;
         padding-bottom: 15px;
@@ -226,17 +227,19 @@
     </h2>
 
     {% if legal_images %}
-    <div class="row g-4">
+    <div class="row g-2 g-md-4">
         {% for image in legal_images %}
             {% set name_without_ext = image.rsplit('.', 1)[0] %}
 
-            <div class="col-md-4 col-sm-6">
+            <div class="col-4 col-md-4">
                 <div class="card about-card shadow-sm">
-                    <div class="overflow-hidden">
-                        <img src="{{ url_for('static', filename='images/legal/' ~ image) }}"
-                             class="card-img-top"
-                             alt="{{ name_without_ext|replace('_',' ') }}">
-                    </div>
+                    <a href="{{ url_for('static', filename='images/legal/' ~ image) }}" class="zoom-trigger" data-caption="{{ name_without_ext|replace('_',' ') }}">
+                        <div class="overflow-hidden">
+                            <img src="{{ url_for('static', filename='images/legal/' ~ image) }}"
+                                 class="card-img-top"
+                                 alt="{{ name_without_ext|replace('_',' ') }}">
+                        </div>
+                    </a>
                     <div class="card-body">
                         <h4 class="card-title">
                             {{ name_without_ext|replace('_',' ') }}

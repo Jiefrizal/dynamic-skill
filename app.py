@@ -269,23 +269,8 @@ def upload_hero():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/contact")
 def contact():
-    if request.method == "POST":
-        name = request.form.get('name', '').strip()
-        email = request.form.get('email', '').strip()
-        message = request.form.get('message', '').strip()
-
-        # Validation
-        if not name or not email or not message:
-            return jsonify({'success': False, 'error': 'Semua field harus diisi'}), 400
-
-        try:
-            save_message(name, email, message)
-            return jsonify({'success': True, 'message': 'Pesan Anda berhasil dikirim!'}), 200
-        except Exception as e:
-            return jsonify({'success': False, 'error': str(e)}), 500
-
     return render_template("pages/contact.html")
 
 
