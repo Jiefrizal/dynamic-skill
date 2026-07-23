@@ -135,12 +135,18 @@ def allowed_file(filename):
     """Check if file extension is allowed"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def get_hero_images():
+    """Get all hero images from folder, sorted"""
+    if os.path.isdir(HERO_FOLDER):
+        images = sorted([f for f in os.listdir(HERO_FOLDER) if allowed_file(f)])
+        return images
+    return []
+
 def get_hero_image():
     """Get current hero image from folder"""
-    if os.path.isdir(HERO_FOLDER):
-        images = [f for f in os.listdir(HERO_FOLDER) if allowed_file(f)]
-        if images:
-            return sorted(images)[-1]  # Return latest image
+    images = get_hero_images()
+    if images:
+        return images[-1]  # Return latest image
     return None
 
 def delete_old_hero_images():

@@ -1,10 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
 
-        <a class="navbar-brand" href="{{ url_for('home') }}">
-    <img src="{{ url_for('static', filename='images/logo/logo.png') }}"
-         alt="Dynamic Skill Logo"
-         class="navbar-logo">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo/logo.png') }}"
+                 alt="Dynamic Skill Logo"
+                 class="navbar-logo">
+            <div class="company-name-inline">
+                <span class="company-line1">PT. Lentera Dinamika Indonesia</span>
+                <span class="company-line2">Dynamic Skill</span>
+            </div>
         </a>
 
         <button class="navbar-toggler"

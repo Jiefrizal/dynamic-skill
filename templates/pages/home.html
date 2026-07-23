@@ -88,6 +88,20 @@ Dynamic Skill
         margin-top: 0px;
     }
 }
+
+/* Mobile: 4 item dalam satu baris horizontal dengan font kecil */
+@media (max-width: 576px) {
+    .stats-section .stat-card {
+        padding: 0.25rem 0.1rem;
+    }
+    .stats-section .stat-number {
+        font-size: 1.1rem;
+        margin-bottom: 0.05rem;
+    }
+    .stats-section .stat-label {
+        font-size: 0.6rem;
+    }
+}
 </style>
 
 <section class="hero">
@@ -109,25 +123,25 @@ Dynamic Skill
 <section class="stats-section py-5 bg-light">
     <div class="container">
         <div class="row text-center g-4">
-            <div class="col-6 col-md-3">
+            <div class="col-3 col-md-3">
                 <div class="stat-card">
                     <h2 class="stat-number">100+</h2>
                     <p class="stat-label">Program Training</p>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-3 col-md-3">
                 <div class="stat-card">
                     <h2 class="stat-number">50+</h2>
                     <p class="stat-label">Perusahaan Klien</p>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-3 col-md-3">
                 <div class="stat-card">
                     <h2 class="stat-number">5000+</h2>
                     <p class="stat-label">Peserta</p>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-3 col-md-3">
                 <div class="stat-card">
                     <h2 class="stat-number">10+</h2>
                     <p class="stat-label">Tahun Pengalaman</p>

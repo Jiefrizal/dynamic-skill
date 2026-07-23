@@ -271,8 +271,8 @@ footer .col-md-6{
 ================================================== */
 
 .navbar{
-    background:transparent;
-    padding:18px 0;
+    background: #fff;
+    padding:6px 0;
     transition:.4s;
     z-index:9999;
 }
@@ -335,12 +335,12 @@ footer .col-md-6{
 =========================== */
 
 .navbar-logo{
-    height:75px;
+    height:60px;
     transition:.3s ease;
 }
 
 .navbar.scrolled .navbar-logo{
-    height:60px;
+    height:48px;
 }
 
 
@@ -358,11 +358,20 @@ footer .col-md-6{
     }
 
     .navbar-logo{
-        height:55px;
+        height:30px;
     }
 
     .navbar.scrolled .navbar-logo{
-        height:48px;
+        height:27px;
+    }
+
+    .navbar {
+        padding: 4px 0;
+    }
+
+    .navbar .container {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .stats-section{
@@ -376,6 +385,16 @@ footer .col-md-6{
 
     .stat-label{
         font-size:.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-number {
+        font-size: 1.35rem;
+    }
+    .stat-label {
+        font-size: .7rem;
+        white-space: nowrap;
     }
 }
 
@@ -415,7 +434,7 @@ footer .col-md-6{
     margin-bottom:30px;
 }
 .content-page{
-    padding-top:140px;
+    padding-top:120px;
     padding-bottom:60px;
 }
 
@@ -439,10 +458,6 @@ footer .col-md-6{
     line-height:1.9;
     font-size:18px;
     color:#444;
-}
-.content-page{
-    padding-top:140px;
-    padding-bottom:60px;
 }
 
 .page-heading{
@@ -474,7 +489,7 @@ footer .col-md-6{
     line-height:1.8;
 }
 .consultation-page {
-    padding-top: 140px;
+    padding-top: 120px;
     padding-bottom: 80px;
 }
 
@@ -581,8 +596,8 @@ footer .col-md-6{
     .navbar-toggler {
         background: rgba(17, 25, 40, 0.95);
         border: none;
-        border-radius: 10px;
-        padding: 8px 10px;
+        border-radius: 6px;
+        padding: 4px 6px;
         box-shadow: 0 4px 12px rgba(0,0,0,.25);
         transition: all .3s ease;
     }
@@ -597,6 +612,8 @@ footer .col-md-6{
 
     .navbar-toggler-icon {
         filter: brightness(0) invert(1);
+        width: 22px;
+        height: 22px;
     }
 }
 /* ==========================================
@@ -711,4 +728,48 @@ body {
         padding-top:5px !important;
     }
 
+}
+/* NAMA PERUSAHAAN DI DALAM NAVBAR */
+.company-name-inline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #333;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.company-name-inline .company-line1 {
+    font-size: inherit;
+    font-weight: 700;
+}
+
+.company-name-inline .company-line2 {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    opacity: 0.85;
+}
+
+.navbar.scrolled .company-name-inline {
+    color: #fff;
+}
+
+@media (max-width: 576px) {
+    .company-name-inline {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+    .company-name-inline .company-line2 {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+}
+
+.hero {
+    padding-top: 0;
 }
