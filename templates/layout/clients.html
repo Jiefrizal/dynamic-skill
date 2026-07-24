@@ -1,0 +1,58 @@
+<!-- Section Client Kami -->
+<section class="clients-section bg-light">
+    <div class="container-fluid px-0">
+        <div class="text-center mb-4">
+            <h2 class="clients-title">Client Kami</h2>
+            <div class="clients-title-line"></div>
+            <p class="clients-subtitle text-secondary px-3">
+                Telah dipercaya oleh berbagai instansi pemerintah, BUMN, perusahaan swasta, dan organisasi nasional.
+            </p>
+        </div>
+
+        {% if clients_images %}
+        <div class="marquee-wrapper">
+            {% for row in clients_images|slice(2) %}
+            <div class="marquee-track {% if loop.index == 2 %}marquee-reverse{% endif %}">
+                <!-- Group 1 -->
+                <div class="marquee-group">
+                    {% for image in row %}
+                    {% set name_without_ext = image.rsplit('.', 1)[0] %}
+                    <div class="client-logo-card shadow-sm text-center">
+                        <img src="{{ url_for('static', filename='images/clients/' ~ image) }}" 
+                             alt="{{ name_without_ext|replace('_',' ') }}"
+                             class="img-fluid client-logo"
+                             title="{{ name_without_ext|replace('_',' ') }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Group 2 (Duplicate for infinite seamless scrolling) -->
+                <div class="marquee-group" aria-hidden="true">
+                    {% for image in row %}
+                    {% set name_without_ext = image.rsplit('.', 1)[0] %}
+                    <div class="client-logo-card shadow-sm text-center">
+                        <img src="{{ url_for('static', filename='images/clients/' ~ image) }}" 
+                             alt="{{ name_without_ext|replace('_',' ') }}"
+                             class="img-fluid client-logo"
+                             title="{{ name_without_ext|replace('_',' ') }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center text-secondary">
+                    <div class="p-4 bg-white border rounded-3 shadow-sm">
+                        <p class="mb-2 fs-5 fw-semibold">Tidak ada logo klien yang ditemukan.</p>
+                        <p class="mb-0 small text-muted">
+                            Tambahkan file gambar logo ke folder <code>static/images/clients/</code> untuk menampilkannya secara dinamis di sini.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>

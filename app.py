@@ -14,6 +14,7 @@ HERO_FOLDER = os.path.join(app.static_folder, 'images', 'hero')
 TEAM_FOLDER = os.path.join(app.static_folder, 'images', 'team')
 LEGAL_FOLDER = os.path.join(app.static_folder, 'images', 'legal')
 VISIMISI_FOLDER = os.path.join(app.static_folder, 'images', 'visimisi')
+CLIENTS_FOLDER = os.path.join(app.static_folder, 'images', 'clients')
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -22,6 +23,8 @@ os.makedirs(HERO_FOLDER, exist_ok=True)
 os.makedirs(TEAM_FOLDER, exist_ok=True)
 os.makedirs(LEGAL_FOLDER, exist_ok=True)
 os.makedirs(VISIMISI_FOLDER, exist_ok=True)
+os.makedirs(CLIENTS_FOLDER, exist_ok=True)
+
 
 def init_excel():
     """Initialize Excel file with headers if it doesn't exist"""
@@ -194,7 +197,21 @@ def get_legal_images():
     return []
 
 
+def get_clients_images():
+    """Get all client images from the clients folder."""
+    if os.path.isdir(CLIENTS_FOLDER):
+        return sorted([f for f in os.listdir(CLIENTS_FOLDER) if allowed_file(f)])
+    return []
+
+
+@app.context_processor
+def inject_clients():
+    """Inject client images list to all templates."""
+    return dict(clients_images=get_clients_images())
+
+
 @app.route("/")
+
 def home():
     hero_image = get_hero_image()
     visimisi_image = get_visimisi_image()
