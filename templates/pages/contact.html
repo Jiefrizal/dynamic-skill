@@ -37,31 +37,102 @@
     }
     .contact-card {
         border: none;
-        border-radius: 16px;
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-        background-color: #f8f9fa;
-        border: 1px solid #e9ecef;
+        border-radius: 20px;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        background: #ffffff;
+        border: 1px solid #eef2f5;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+    }
+    .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
     .contact-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.05) !important;
+        box-shadow: 0 20px 40px rgba(13, 110, 253, 0.08) !important;
+        border-color: #dbeafe;
     }
+    .contact-card:hover::before {
+        opacity: 1;
+    }
+    
+    .icon-wrapper {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: rgba(13, 110, 253, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .contact-card:hover .icon-wrapper {
+        transform: scale(1.1);
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+    .icon-wrapper svg {
+        width: 32px;
+        height: 32px;
+        fill: #0d6efd;
+    }
+    
+    .contact-card h5 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.75rem;
+    }
+    
+    .contact-detail {
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: #495057;
+        margin-bottom: 0;
+    }
+    
+    .contact-link {
+        color: #495057;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .contact-link:hover {
+        color: #0d6efd;
+        text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
         .contact-card {
-            padding: 0.75rem 0.25rem !important;
+            padding: 1rem 0.25rem !important;
             border-radius: 12px !important;
         }
-        .contact-card .fs-1 {
-            font-size: 1.5rem !important;
-            margin-bottom: 0.5rem !important;
+        .icon-wrapper {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 0.5rem;
+        }
+        .icon-wrapper svg {
+            width: 20px;
+            height: 20px;
         }
         .contact-card h5 {
-            font-size: 12px !important;
+            font-size: 11px !important;
             margin-bottom: 0.25rem !important;
         }
-        .contact-card p {
-            font-size: 9px !important;
-            line-height: 1.4 !important;
+        .contact-detail {
+            font-size: 9.5px !important;
+            line-height: 1.35 !important;
+            word-break: break-all;
         }
     }
 </style>
@@ -84,12 +155,16 @@
                     dan pengembangan sumber daya manusia.
                 </p>
 
-                <div class="row g-2 g-md-4 justify-content-center">
+                <div class="row g-4 justify-content-center">
                     <div class="col-4 col-md-4">
                         <div class="card contact-card shadow-sm p-4 h-100">
-                            <div class="fs-1 mb-3">📍</div>
-                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Alamat</h5>
-                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold">Alamat</h5>
+                            <p class="contact-detail text-secondary">
                                 Jl. Tuanku Tambusai No. 08,<br>
                                 Kel. Jadirejo, Kec. Sukajadi,<br>
                                 Kota Pekanbaru, Riau
@@ -99,20 +174,28 @@
 
                     <div class="col-4 col-md-4">
                         <div class="card contact-card shadow-sm p-4 h-100">
-                            <div class="fs-1 mb-3">📧</div>
-                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Email</h5>
-                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0; word-break: break-all;">
-                                lenteradinamikaindonesia@gmail.com
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.756zm5.436-1.157L16 11.801V4.697l-5.803 3.558z"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold">Email</h5>
+                            <p class="contact-detail text-secondary" style="word-break: break-all;">
+                                <a href="mailto:lenteradinamikaindonesia@gmail.com" class="contact-link">lenteradinamikaindonesia@gmail.com</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="col-4 col-md-4">
                         <div class="card contact-card shadow-sm p-4 h-100">
-                            <div class="fs-1 mb-3">📞</div>
-                            <h5 class="fw-bold mb-3" style="color: #1a1a1a;">Telepon</h5>
-                            <p class="text-secondary" style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">
-                                0813-6400-4646
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                </svg>
+                            </div>
+                            <h5 class="fw-bold">Telepon</h5>
+                            <p class="contact-detail text-secondary">
+                                <a href="tel:081364004646" class="contact-link">0813-6400-4646</a>
                             </p>
                         </div>
                     </div>
