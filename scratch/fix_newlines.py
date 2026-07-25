@@ -4,11 +4,11 @@ import re
 css_path = r"c:\Users\LENOVO\OneDrive\Desktop\Dynamic Skill\company profile\static\css\style.css"
 
 if os.path.exists(css_path):
-    with open(css_path, 'r', encoding='utf-8') as f:
+    with open(css_path, 'r', encoding='utf-8', newline='') as f:
         content = f.read()
         
     # Normalize to standard \n first
-    content = content.replace('\r\n', '\n').replace('\r', '\n')
+    content = content.replace('\r\r\n', '\n').replace('\r\n', '\n').replace('\r', '\n')
     
     # 1. Remove blank lines immediately after opening brace {
     content = re.sub(r'\{\s*\n+', '{\n', content)
@@ -25,7 +25,7 @@ if os.path.exists(css_path):
     # Restore standard Windows CRLF line endings
     restored = content.replace('\n', '\r\n')
     
-    with open(css_path, 'w', encoding='utf-8') as f:
+    with open(css_path, 'w', encoding='utf-8', newline='') as f:
         f.write(restored)
         
     print("Success: CSS file formatted and cleaned up successfully!")
