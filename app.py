@@ -15,6 +15,7 @@ TEAM_FOLDER = os.path.join(app.static_folder, 'images', 'team')
 LEGAL_FOLDER = os.path.join(app.static_folder, 'images', 'legal')
 VISIMISI_FOLDER = os.path.join(app.static_folder, 'images', 'visimisi')
 CLIENTS_FOLDER = os.path.join(app.static_folder, 'images', 'clients')
+NOTES_FOLDER = os.path.join(os.path.dirname(__file__), 'notes')
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -24,6 +25,7 @@ os.makedirs(TEAM_FOLDER, exist_ok=True)
 os.makedirs(LEGAL_FOLDER, exist_ok=True)
 os.makedirs(VISIMISI_FOLDER, exist_ok=True)
 os.makedirs(CLIENTS_FOLDER, exist_ok=True)
+os.makedirs(NOTES_FOLDER, exist_ok=True)
 
 
 def init_excel():
@@ -210,12 +212,29 @@ def inject_clients():
     return dict(clients_images=get_clients_images())
 
 
-@app.route("/")
+def get_dynamic_sentences():
+    """Get all dynamic sentences from notes folder (.txt files)"""
+    sentences = []
+    if os.path.isdir(NOTES_FOLDER):
+        for filename in sorted(os.listdir(NOTES_FOLDER)):
+            if filename.endswith('.txt'):
+                filepath = os.path.join(NOTES_FOLDER, filename)
+                try:
+                    with open(filepath, 'r', encoding='utf-8-sig') as f:
+                        content = f.read().strip()
+                        if content:
+                            sentences.append(content)
+                except Exception:
+                    pass
+    return sentences
 
+
+@app.route("/")
 def home():
     hero_image = get_hero_image()
     visimisi_image = get_visimisi_image()
-    return render_template("pages/home.html", hero_image=hero_image, visimisi_image=visimisi_image)
+    sentences = get_dynamic_sentences()
+    return render_template("pages/home.html", hero_image=hero_image, visimisi_image=visimisi_image, sentences=sentences)
 
 
 @app.route("/about")
