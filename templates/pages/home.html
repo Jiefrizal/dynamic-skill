@@ -279,6 +279,188 @@ Dynamic Skill
     transform: scale(1.02);
     box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
 }
+
+/* Inline Animated SVG Inhouse Diagram Styles */
+.inhouse-diagram-section {
+    position: relative;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+#inhouseSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.inhouse-diagram-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px 1fr;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.inhouse-item {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #212529;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    user-select: none;
+}
+
+.hard-item {
+    border-right: 4px solid #ffc107;
+    text-align: left;
+}
+
+.hard-item:hover {
+    border-color: #ffc107;
+    background: #ffc107;
+    color: #212529;
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.25);
+    transform: translateY(-2px) translateX(-3px);
+}
+
+.soft-item {
+    border-left: 4px solid #ffc107;
+    text-align: right;
+}
+
+.soft-item:hover {
+    border-color: #ffc107;
+    background: #ffc107;
+    color: #212529;
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.25);
+    transform: translateY(-2px) translateX(3px);
+}
+
+.center-glow-node {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    border-radius: 50%;
+    box-shadow: 0 0 35px rgba(13, 110, 253, 0.45);
+    border: 5px solid #ffffff;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: centerPulse 3s infinite ease-in-out;
+}
+
+.center-glow-node:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 210, 255, 0.7);
+}
+
+@keyframes centerPulse {
+    0% { box-shadow: 0 0 25px rgba(13, 110, 253, 0.45); }
+    50% { box-shadow: 0 0 45px rgba(0, 210, 255, 0.65); }
+    100% { box-shadow: 0 0 25px rgba(13, 110, 253, 0.45); }
+}
+
+/* Scaling down for medium screens (tablets) */
+@media (max-width: 992px) {
+    .inhouse-diagram-grid {
+        grid-template-columns: 1fr 140px 1fr;
+        gap: 20px;
+    }
+    
+    .center-glow-node {
+        width: 120px;
+        height: 120px;
+        border-width: 3px;
+    }
+    
+    .core-title {
+        font-size: 12px !important;
+    }
+    
+    .program-label {
+        font-size: 8px !important;
+    }
+    
+    .excellence-label {
+        font-size: 7px !important;
+        padding: 2px 4px !important;
+    }
+    
+    .col-title {
+        font-size: 0.9rem !important;
+    }
+    
+    .badge-custom {
+        font-size: 9px !important;
+    }
+    
+    .inhouse-item {
+        font-size: 11px;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+}
+
+/* Scaling down for small screens (mobile) */
+@media (max-width: 576px) {
+    .inhouse-diagram-grid {
+        grid-template-columns: 1fr 85px 1fr;
+        gap: 8px;
+    }
+    
+    .center-glow-node {
+        width: 75px;
+        height: 75px;
+        border-width: 2px;
+        box-shadow: 0 0 15px rgba(13, 110, 253, 0.35);
+    }
+    
+    .core-title {
+        font-size: 8px !important;
+    }
+    
+    .program-label {
+        display: none !important;
+    }
+    
+    .excellence-label {
+        display: none !important;
+    }
+    
+    .col-title {
+        font-size: 0.65rem !important;
+    }
+    
+    .badge-custom {
+        font-size: 7px !important;
+        padding: 2px 5px !important;
+    }
+    
+    .inhouse-item {
+        font-size: 7.2px;
+        padding: 4px 6px;
+        border-radius: 6px;
+        min-height: auto;
+    }
+}
 </style>
 
 <section class="hero">
@@ -430,9 +612,10 @@ Dynamic Skill
     </div>
 </section>
 
-{% if inhouse_image %}
 <!-- Section Program In House Training -->
-<section class="py-5 bg-light animate-on-scroll anim-up">
+<section class="py-5 bg-light animate-on-scroll anim-up inhouse-diagram-section">
+    {% if inhouse_image %}
+    <!-- Render Static Image Fallback if Admin Uploaded one -->
     <div class="container text-center">
         <div class="mb-4">
             <h2 class="welcome-text">Program In House Training</h2>
@@ -453,8 +636,71 @@ Dynamic Skill
             </div>
         </div>
     </div>
+    {% else %}
+    <!-- SVG Connection Layer for Active Lasers -->
+    <svg id="inhouseSvg"></svg>
+
+    <div class="container text-center" style="position: relative; z-index: 3;">
+        <div class="mb-4">
+            <h2 class="welcome-text">Program In House Training</h2>
+            <div style="width: 60px; height: 3px; background-color: #ffc107; margin: 15px auto 0;"></div>
+        </div>
+        <p class="welcome-subtext mb-4">
+            Kami menyediakan program pelatihan terlengkap baik keterampilan teknis (Hard Skills) maupun pengembangan karakter (Soft Skills) yang disesuaikan dengan kebutuhan organisasi Anda.
+        </p>
+
+        <!-- Custom Grid instead of Bootstrap row to enforce side-by-side horizontal view -->
+        <div class="inhouse-diagram-grid">
+            <!-- Left Column: Hard Skills -->
+            <div class="inhouse-col hard-col d-flex flex-column gap-2 gap-md-3">
+                <div class="text-start mb-2 header-label">
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-1 mb-md-2 badge-custom" style="background-color: #ffc107 !important; color: #212529 !important;"><i class="fa-solid fa-microchip me-1"></i> HARD SKILLS</span>
+                    <h4 class="fw-bold m-0 col-title" style="color: #212529; font-size: 1.1rem;">Keterampilan Teknis</h4>
+                </div>
+                <!-- 10 Hard Skills item cards -->
+                <div class="inhouse-item hard-item" data-id="h1">Teknologi Informasi & Software Development</div>
+                <div class="inhouse-item hard-item" data-id="h2">Data Science & Business Intelligence</div>
+                <div class="inhouse-item hard-item" data-id="h3">Cybersecurity & Pengelolaan Jaringan</div>
+                <div class="inhouse-item hard-item" data-id="h4">Pengembangan AI & Machine Learning</div>
+                <div class="inhouse-item hard-item" data-id="h5">Desain & Media Kreatif</div>
+                <div class="inhouse-item hard-item" data-id="h6">Video Editing & Produksi Media</div>
+                <div class="inhouse-item hard-item" data-id="h7">Pemasaran Digital & Bisnis</div>
+                <div class="inhouse-item hard-item" data-id="h8">Keuangan & Akuntansi</div>
+                <div class="inhouse-item hard-item" data-id="h9">Manajemen Proyek</div>
+                <div class="inhouse-item hard-item" data-id="h10">Teknis Industri & Operasional</div>
+            </div>
+
+            <!-- Center Pulsing Core Node -->
+            <div class="inhouse-col center-col d-flex justify-content-center align-items-center">
+                <div id="inhouseCenter" class="center-glow-node">
+                    <span class="program-label" style="font-size: 10px; letter-spacing: 2px; font-weight: bold; opacity: 0.9; margin-bottom: 5px;">PROGRAM</span>
+                    <h5 class="core-title fw-bold m-0" style="line-height: 1.2; font-size: 17px; letter-spacing: 0.5px;">IN HOUSE<br>TRAINING</h5>
+                    <span class="excellence-label badge bg-white text-primary mt-2" style="font-size: 9px; font-weight: bold;">EXCELLENCE</span>
+                </div>
+            </div>
+
+            <!-- Right Column: Soft Skills -->
+            <div class="inhouse-col soft-col d-flex flex-column gap-2 gap-md-3">
+                <div class="text-end mb-2 header-label">
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-1 mb-md-2 badge-custom" style="background-color: #ffc107 !important; color: #212529 !important;"><i class="fa-solid fa-users me-1"></i> SOFT SKILLS</span>
+                    <h4 class="fw-bold m-0 col-title" style="color: #212529; font-size: 1.1rem;">Interpersonal & Karakter</h4>
+                </div>
+                <!-- 10 Soft Skills item cards -->
+                <div class="inhouse-item soft-item" data-id="s1">Komunikasi Efektif</div>
+                <div class="inhouse-item soft-item" data-id="s2">Negosiasi & Persuasi</div>
+                <div class="inhouse-item soft-item" data-id="s3">Customer Service Excellence</div>
+                <div class="inhouse-item soft-item" data-id="s4">Kepemimpinan & Manajemen Diri</div>
+                <div class="inhouse-item soft-item" data-id="s5">Manajemen Waktu & Produktivitas</div>
+                <div class="inhouse-item soft-item" data-id="s6">Critical Thinking & Problem Solving</div>
+                <div class="inhouse-item soft-item" data-id="s7">Kecerdasan Emosional</div>
+                <div class="inhouse-item soft-item" data-id="s8">Manajemen Stres & Resiliensi</div>
+                <div class="inhouse-item soft-item" data-id="s9">Kerja Sama Tim (Teamwork)</div>
+                <div class="inhouse-item soft-item" data-id="s10">Table Manner</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </section>
-{% endif %}
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -480,6 +726,83 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }, 4500);
     }
+
+    // draw active laser connection lines
+    function drawInhouseConnections() {
+        const svg = document.getElementById('inhouseSvg');
+        if (!svg) return;
+        
+        svg.innerHTML = ''; // clear previous lines
+        
+        const center = document.getElementById('inhouseCenter');
+        if (!center) return;
+
+        const centerRect = center.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+
+        const centerPoint = {
+            x: centerRect.left + centerRect.width / 2 - svgRect.left,
+            y: centerRect.top + centerRect.height / 2 - svgRect.top
+        };
+
+        const items = document.querySelectorAll('.inhouse-item');
+        items.forEach(item => {
+            const itemRect = item.getBoundingClientRect();
+            const isHard = item.classList.contains('hard-item');
+
+            // Find contact points
+            const itemPoint = {
+                x: isHard 
+                    ? itemRect.right - svgRect.left 
+                    : itemRect.left - svgRect.left,
+                y: itemRect.top + itemRect.height / 2 - svgRect.top
+            };
+
+            // Draw clean Cubic Bezier paths from center to items
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            
+            // Dynamic control coordinates based on screen scaling
+            const distanceX = Math.abs(centerPoint.x - itemPoint.x);
+            const scaleFactor = window.innerWidth <= 576 ? 0.35 : (window.innerWidth <= 992 ? 0.6 : 1.0);
+            const control1X = isHard ? centerPoint.x - distanceX * 0.45 * scaleFactor : centerPoint.x + distanceX * 0.45 * scaleFactor;
+            const control2X = isHard ? itemPoint.x + 30 * scaleFactor : itemPoint.x - 30 * scaleFactor;
+
+            const d = `M ${centerPoint.x} ${centerPoint.y} C ${control1X} ${centerPoint.y}, ${control2X} ${itemPoint.y}, ${itemPoint.x} ${itemPoint.y}`;
+
+            path.setAttribute('d', d);
+            path.setAttribute('stroke', '#ffc107');
+            path.setAttribute('stroke-width', '1.5');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-opacity', '0.25');
+            path.setAttribute('stroke-dasharray', '3 3');
+            svg.appendChild(path);
+
+            // Pulsing laser dot running along path
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('r', '3');
+            circle.setAttribute('fill', '#ffc107');
+            
+            // Gimmick drop-shadow for laser glow
+            circle.style.filter = 'drop-shadow(0 0 3px #ffc107)';
+
+            const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+            animateMotion.setAttribute('path', d);
+            animateMotion.setAttribute('dur', (2.5 + Math.random() * 2) + 's');
+            animateMotion.setAttribute('repeatCount', 'indefinite');
+
+            circle.appendChild(animateMotion);
+            svg.appendChild(circle);
+        });
+    }
+
+    // Initialize and bind events
+    drawInhouseConnections();
+    
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(drawInhouseConnections, 100);
+    });
 });
 </script>
 
