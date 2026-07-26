@@ -33,6 +33,10 @@ Dynamic Skill
     background: #fff;
     padding: 1.5rem 1rem;
     text-align: center;
+    min-height: 260px; /* Space to accommodate sentences up to 7 lines without shifting */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes rotateAndFade {
@@ -97,7 +101,8 @@ Dynamic Skill
 
 @media (max-width: 768px) {
     .hero-title-bar {
-        padding: 1.25rem 0.5rem;
+        padding: 1rem 0.5rem;
+        min-height: 150px; /* Space for mobile view to prevent shifting */
     }
 }
 
