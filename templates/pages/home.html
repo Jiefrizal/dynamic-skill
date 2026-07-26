@@ -258,6 +258,27 @@ Dynamic Skill
     opacity: 1;
     transform: translate(0);
 }
+
+/* Scroll Fade-In & Hover Transition for In House image */
+.inhouse-img {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.animate-visible .inhouse-img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.inhouse-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+
+.inhouse-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
+}
 </style>
 
 <section class="hero">
@@ -406,7 +427,34 @@ Dynamic Skill
                 </div>
             </div>
         </div>
+    </div>
 </section>
+
+{% if inhouse_image %}
+<!-- Section Program In House Training -->
+<section class="py-5 bg-light animate-on-scroll anim-up">
+    <div class="container text-center">
+        <div class="mb-4">
+            <h2 class="welcome-text">Program In House Training</h2>
+            <div style="width: 60px; height: 3px; background-color: #0d6efd; margin: 15px auto 0;"></div>
+        </div>
+        <p class="welcome-subtext mb-4">
+            Kami menyediakan program pelatihan terlengkap baik keterampilan teknis (Hard Skills) maupun pengembangan karakter (Soft Skills) yang disesuaikan dengan kebutuhan organisasi Anda.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm overflow-hidden rounded-4 inhouse-card">
+                    <img 
+                        src="{{ url_for('static', filename='images/inhouse/' ~ inhouse_image) }}" 
+                        alt="Program In House Training" 
+                        class="img-fluid w-100 d-block inhouse-img"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

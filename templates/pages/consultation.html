@@ -6,115 +6,231 @@ Konsultasi - Dynamic Skill
 
 {% block content %}
 
-<section class="consultation-page">
+<style>
+    .consultation-section {
+        font-family: 'Montserrat', sans-serif;
+        padding-top: 100px !important;
+        padding-bottom: 60px;
+        background-color: #f8f9fa;
+    }
+    .consultation-title {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    .consultation-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #0d6efd;
+        border-radius: 2px;
+    }
+    .consultation-lead {
+        font-size: clamp(14px, 2.5vw, 16px);
+        line-height: 1.6;
+        color: #555;
+        max-width: 600px;
+        margin: 0 auto 3rem;
+    }
+    .consultation-card {
+        background: #ffffff;
+        border: 1px solid #eef2f5;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .consultation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    }
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+        text-align: left;
+        display: block;
+    }
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+        font-size: 14px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+    .btn-submit {
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.85rem;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+    .btn-submit:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+    }
+    .alert-feedback {
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 14px;
+        text-align: left;
+    }
+</style>
 
-    <div class="container">
+<section class="consultation-section">
+    <div class="container text-center">
+        <h1 class="consultation-title">Konsultasi Sekarang</h1>
+        <p class="consultation-lead">
+            Sampaikan kebutuhan pengembangan SDM atau bisnis Anda. Tim konsultan ahli Dynamic Skill siap memberikan solusi terbaik.
+        </p>
 
-        <div class="text-center mb-5">
-            <h1>Konsultasi Sekarang</h1>
-            <p>
-                Sampaikan kebutuhan Anda, tim Dynamic Skill siap membantu.
-            </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-start">
+                <div class="consultation-card">
+                    <!-- Feedback Alert -->
+                    <div id="formFeedback" class="d-none" role="alert"></div>
+
+                    <form id="consultationForm">
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Nama Lengkap</label>
+                            <input
+                                type="text"
+                                id="inputName"
+                                name="name"
+                                class="form-control"
+                                placeholder="Masukkan nama lengkap Anda"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input
+                                type="email"
+                                id="inputEmail"
+                                name="email"
+                                class="form-control"
+                                placeholder="contoh@perusahaan.com"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="selectService" class="form-label">Pilih Layanan</label>
+                            <select id="selectService" name="service" class="form-select" required>
+                                <option value="" disabled selected>Pilih Program Layanan</option>
+                                <option value="Training">Training</option>
+                                <option value="Consulting">Consulting</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Other">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputPreferred" class="form-label">Waktu Preferensi Konsultasi</label>
+                            <input 
+                                type="text" 
+                                id="inputPreferred"
+                                name="preferred" 
+                                class="form-control"
+                                placeholder="Contoh: Senin Pagi, Jam Kerja, dll.">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="textareaMessage" class="form-label">Pesan / Detail Kebutuhan</label>
+                            <textarea 
+                                id="textareaMessage"
+                                name="message"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Jelaskan kebutuhan pelatihan atau konsultasi organisasi Anda..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit w-100">
+                            Kirim Permintaan Konsultasi
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-
-        <div class="consultation-card">
-
-            <form method="POST">
-
-                <div class="mb-3">
-                    <label>Nama</label>
-                    <input
-                        type="text"
-                        name="nama"
-                        class="form-control"
-                        required>
-                </div>
-
-
-                <div class="mb-3">
-                    <label>Perusahaan</label>
-                    <input
-                        type="text"
-                        name="perusahaan"
-                        class="form-control">
-                </div>
-    <input
-    type="email"
-    name="email"
-    class="form-control"
-    required>
-    <div class="mb-3">
-    <label>Nomor Telepon</label>
-    <input
-        type="text"
-        name="telepon"
-        class="form-control">
-</div>
-
-
-                <div class="mb-3">
-                    <label>Layanan</label>
-                    <input type="text" 
-                           name="service" 
-                           class="form-control">
-                </div>
-
-
-                <div class="mb-3">
-                    <label>Waktu Preferensi</label>
-                    <input type="text" 
-                           name="preferred" 
-                           class="form-control">
-                </div>
-
-
-                <div class="mb-3">
-                    <label>Pesan</label>
-                    <textarea name="message"
-                              class="form-control"></textarea>
-                </div>
-             </form>
-
-        </div>
-
     </div>
-
 </section>
 
-from flask_mail import Message
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('consultationForm');
+    const feedback = document.getElementById('formFeedback');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Set loading state on submit button
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Mengirim...';
+            
+            // Clear previous feedback alerts
+            feedback.className = 'd-none';
+            feedback.textContent = '';
+            
+            const formData = new FormData(form);
+            
+            fetch('/consultation', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                return response.json().then(data => ({
+                    status: response.status,
+                    ok: response.ok,
+                    body: data
+                }));
+            })
+            .then(res => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                
+                if (res.ok && res.body.success) {
+                    feedback.className = 'alert alert-success alert-feedback';
+                    feedback.textContent = res.body.message || 'Permintaan konsultasi berhasil dikirim!';
+                    form.reset();
+                    // Scroll smoothly to feedback alert
+                    feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    feedback.className = 'alert alert-danger alert-feedback';
+                    feedback.textContent = res.body.error || 'Terjadi kesalahan saat mengirim formulir.';
+                    feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                feedback.className = 'alert alert-danger alert-feedback';
+                feedback.textContent = 'Terjadi kesalahan jaringan. Silakan periksa koneksi Anda dan coba lagi.';
+                feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    }
+});
+</script>
 
-@app.route("/consultation", methods=["GET","POST"])
-def consultation():
-
-    if request.method == "POST":
-
-        nama = request.form["nama"]
-        perusahaan = request.form["perusahaan"]
-        email = request.form["email"]
-        telepon = request.form["telepon"]
-        pesan = request.form["pesan"]
-
-        msg = Message(
-            subject="Permintaan Konsultasi Baru",
-            recipients=["info@dynamicskill.id"]
-        )
-
-        msg.body = f"""
-Nama        : {nama}
-Perusahaan  : {perusahaan}
-Email       : {email}
-Telepon     : {telepon}
-
-Pesan:
-
-{pesan}
-"""
-
-        mail.send(msg)
-
-        flash("Pesan berhasil dikirim.")
-        return redirect(url_for("consultation"))
-
-    return render_template("consultation.html")
 {% endblock %}

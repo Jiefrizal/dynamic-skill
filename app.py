@@ -15,6 +15,7 @@ TEAM_FOLDER = os.path.join(app.static_folder, 'images', 'team')
 LEGAL_FOLDER = os.path.join(app.static_folder, 'images', 'legal')
 VISIMISI_FOLDER = os.path.join(app.static_folder, 'images', 'visimisi')
 CLIENTS_FOLDER = os.path.join(app.static_folder, 'images', 'clients')
+INHOUSE_FOLDER = os.path.join(app.static_folder, 'images', 'inhouse')
 NOTES_FOLDER = os.path.join(os.path.dirname(__file__), 'notes')
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
@@ -25,6 +26,7 @@ os.makedirs(TEAM_FOLDER, exist_ok=True)
 os.makedirs(LEGAL_FOLDER, exist_ok=True)
 os.makedirs(VISIMISI_FOLDER, exist_ok=True)
 os.makedirs(CLIENTS_FOLDER, exist_ok=True)
+os.makedirs(INHOUSE_FOLDER, exist_ok=True)
 os.makedirs(NOTES_FOLDER, exist_ok=True)
 
 
@@ -206,6 +208,35 @@ def get_clients_images():
     return []
 
 
+def get_inhouse_images():
+    """Get all inhouse images from folder, sorted"""
+    if os.path.isdir(INHOUSE_FOLDER):
+        images = sorted([f for f in os.listdir(INHOUSE_FOLDER) if allowed_file(f)])
+        return images
+    return []
+
+
+def get_inhouse_image():
+    """Get current inhouse image from folder"""
+    images = get_inhouse_images()
+    if images:
+        return images[-1]  # Return latest image
+    return None
+
+
+def delete_old_inhouse_images():
+    """Delete old inhouse images, keep only the latest"""
+    if os.path.isdir(INHOUSE_FOLDER):
+        images = sorted([f for f in os.listdir(INHOUSE_FOLDER) if allowed_file(f)])
+        if len(images) > 1:
+            # Delete all but the latest
+            for old_image in images[:-1]:
+                try:
+                    os.remove(os.path.join(INHOUSE_FOLDER, old_image))
+                except:
+                    pass
+
+
 @app.context_processor
 def inject_clients():
     """Inject client images list to all templates."""
@@ -233,8 +264,9 @@ def get_dynamic_sentences():
 def home():
     hero_image = get_hero_image()
     visimisi_image = get_visimisi_image()
+    inhouse_image = get_inhouse_image()
     sentences = get_dynamic_sentences()
-    return render_template("pages/home.html", hero_image=hero_image, visimisi_image=visimisi_image, sentences=sentences)
+    return render_template("pages/home.html", hero_image=hero_image, visimisi_image=visimisi_image, inhouse_image=inhouse_image, sentences=sentences)
 
 
 @app.route("/about")
@@ -267,7 +299,8 @@ def gallery():
 @app.route("/admin")
 def admin():
     current_hero = get_hero_image()
-    return render_template("pages/admin.html", current_hero_image=current_hero)
+    current_inhouse = get_inhouse_image()
+    return render_template("pages/admin.html", current_hero_image=current_hero, current_inhouse_image=current_inhouse)
 
 
 @app.route("/admin/upload-hero", methods=["POST"])
@@ -301,6 +334,41 @@ def upload_hero():
         delete_old_hero_images()
         
         return jsonify({'success': True, 'message': 'Gambar berhasil diupload!'}), 200
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route("/admin/upload-inhouse", methods=["POST"])
+def upload_inhouse():
+    """Handle inhouse program image upload"""
+    if 'inhouseImage' not in request.files:
+        return jsonify({'success': False, 'error': 'Tidak ada file yang dipilih'}), 400
+    
+    file = request.files['inhouseImage']
+    
+    if file.filename == '':
+        return jsonify({'success': False, 'error': 'Tidak ada file yang dipilih'}), 400
+    
+    # Check file size
+    if len(file.read()) > MAX_FILE_SIZE:
+        file.seek(0)
+        return jsonify({'success': False, 'error': 'Ukuran file terlalu besar. Maksimal 5MB.'}), 400
+    
+    file.seek(0)
+    
+    if not allowed_file(file.filename):
+        return jsonify({'success': False, 'error': 'Format file tidak didukung. Gunakan JPG, PNG, GIF, atau WEBP.'}), 400
+    
+    try:
+        # Generate secure filename with timestamp
+        filename = secure_filename(f"inhouse_{datetime.now().timestamp()}_{file.filename}")
+        filepath = os.path.join(INHOUSE_FOLDER, filename)
+        file.save(filepath)
+        
+        # Delete old images
+        delete_old_inhouse_images()
+        
+        return jsonify({'success': True, 'message': 'Gambar program berhasil diupload!'}), 200
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
